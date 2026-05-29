@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   creator: "STRIXO STUDIO",
 
   icons: {
-    icon: "/favicon.jpeg",
+    icon: "/favicon.png",
   },
 
   openGraph: {
