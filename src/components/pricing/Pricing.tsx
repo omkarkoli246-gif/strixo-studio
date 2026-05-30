@@ -44,7 +44,7 @@ const websitePlans = [
 ];
 
 function upiLink(note: string) {
-  return `upi://pay?pa=9370309722@fam&pn=STRIXO%20STUDIO&cu=INR&tn=${encodeURIComponent(note)}`;
+  return `upi://pay?pa=7875821001-2@axl&pn=OMKAR%20BALAJI%20KOLI&cu=INR&tn=${encodeURIComponent(note)}`;
 }
 
 function whatsappLink(plan: string) {
