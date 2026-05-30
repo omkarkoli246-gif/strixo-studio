@@ -62,7 +62,7 @@ export default function Contact() {
           className="border border-black/10 bg-white/75 p-7 shadow-sm backdrop-blur sm:p-10"
         >
           <form
-            action="https://formsubmit.co/strixostudio4@gmail.com"
+            action="https://formsubmit.co/dbdb48025167c9c7d63dca1ef5319e29"
             method="POST"
             className="space-y-5"
           >
