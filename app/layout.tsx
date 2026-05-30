@@ -31,7 +31,24 @@ export const metadata: Metadata = {
   creator: "STRIXO STUDIO",
 
   icons: {
-    icon: "/favicon.png",
+    icon: [
+      {
+        url: "/icon",
+        type: "image/png",
+        sizes: "64x64",
+      },
+      {
+        url: "/favicon.png",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      {
+        url: "/icon",
+        type: "image/png",
+        sizes: "64x64",
+      },
+    ],
   },
 
   openGraph: {

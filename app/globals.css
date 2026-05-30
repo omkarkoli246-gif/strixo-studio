@@ -8,18 +8,7 @@ body {
   overflow-x: hidden;
 
   background:
-    linear-gradient(
-      -45deg,
-      #f8f5ef,
-      #eef2ff,
-      #ecfeff,
-      #f5f3ff
-    );
-
-  background-size: 400% 400%;
-
-  animation:
-    gradientMove 15s ease infinite;
+    linear-gradient(180deg, #f7f7f4 0%, #eef2f6 46%, #f8fafc 100%);
 
   color: #111111;
 
@@ -27,6 +16,9 @@ body {
     Arial,
     Helvetica,
     sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
 }
 
 /* ANIMATED BACKGROUND */
@@ -91,6 +83,40 @@ body {
 .section-spacing {
   padding-top: 120px;
   padding-bottom: 120px;
+}
+
+@media (max-width: 640px) {
+  .section-spacing {
+    padding-top: 84px;
+    padding-bottom: 84px;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 24s linear infinite;
+}
+
+@keyframes particlePulse {
+  0%,
+  100% {
+    opacity: 0.18;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.54;
+    transform: scale(1.8);
+  }
 }
 
 /* PREMIUM BUTTON */

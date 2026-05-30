@@ -1,157 +1,163 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Check, CreditCard, MessageCircle } from "lucide-react";
 
-const plans = [
+const websitePlans = [
   {
-    title: "Basic Plan",
-    price: "₹18K",
+    title: "Basic Website",
+    price: "₹18,000",
+    description: "Clean online presence for small businesses.",
     features: [
-      "2-3 Pages Website",
-      "Simple & Clean Design",
-      "Mobile Friendly",
-      "WhatsApp Button",
-      "Contact Form",
+      "2-3 pages",
+      "Mobile responsive design",
+      "WhatsApp enquiry button",
+      "Contact form",
+      "Basic launch SEO",
     ],
   },
-
   {
-    title: "Advance Plan",
-    price: "₹25K",
+    title: "Advance Website",
+    price: "₹25,000",
+    description: "Modern site for brands that need stronger trust.",
+    featured: true,
     features: [
-      "4-6 Pages Website",
-      "Modern UI Design",
-      "Responsive Design",
-      "WhatsApp Integration",
-      "Google Map",
-      "Basic SEO Setup",
+      "4-6 pages",
+      "Premium responsive UI",
+      "Google Map integration",
+      "Lead focused sections",
+      "Basic SEO setup",
     ],
   },
-
   {
-    title: "Premium Plan",
-    price: "₹33K",
+    title: "Premium Website",
+    price: "₹33,000",
+    description: "A richer website with product or service showcase.",
     features: [
-      "6-10 Pages Website",
+      "6-10 pages",
       "Premium UI/UX",
-      "Fast Loading",
-      "Advanced SEO",
-      "Admin Panel",
-      "Product Showcase",
+      "Fast loading setup",
+      "Advanced SEO structure",
+      "Product or portfolio showcase",
     ],
   },
 ];
 
+function upiLink(note: string) {
+  return `upi://pay?pa=9370309722@fam&pn=STRIXO%20STUDIO&cu=INR&tn=${encodeURIComponent(note)}`;
+}
+
+function whatsappLink(plan: string) {
+  return `https://wa.me/919370309722?text=${encodeURIComponent(
+    `Hi STRIXO STUDIO, I want details for ${plan}.`
+  )}`;
+}
+
 export default function Pricing() {
   return (
-    <section
-      id="pricing"
-      className="section-spacing px-6"
-    >
-
-      <div className="max-w-7xl mx-auto">
-
-        {/* Heading */}
+    <section id="pricing" className="section-spacing px-6">
+      <div className="mx-auto max-w-7xl">
         <div className="text-center">
-
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase">
-            WEBSITE PLANS
+          <p className="text-sm font-black uppercase tracking-[0.26em] text-[#b8752e]">
+            Website Plans
           </p>
 
-          <h2 className="text-5xl md:text-6xl font-black mt-4 text-black">
-            Flexible Pricing For Every Business
+          <h2 className="mx-auto mt-4 max-w-4xl text-4xl font-black leading-tight text-black sm:text-6xl">
+            Premium websites built for enquiries and brand trust
           </h2>
 
-          <p className="mt-6 text-gray-600 text-xl max-w-3xl mx-auto">
-            Choose the perfect website package for your business and start building your online presence.
+          <p className="mx-auto mt-6 max-w-3xl text-lg leading-8 text-gray-600">
+            Pick a website package, pay an advance through UPI, and start your
+            project with STRIXO STUDIO.
           </p>
-
         </div>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
-
-          {plans.map((plan, index) => (
-
-            <motion.div
-              key={index}
-              initial={{
-                opacity: 0,
-                y: 60,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              transition={{
-                duration: 0.6,
-                delay: index * 0.1,
-              }}
-              whileHover={{
-                scale: 1.03,
-              }}
-              className="glass p-10 rounded-[30px] shadow-2xl border border-white/20 relative overflow-hidden"
+        <div className="mt-16 grid grid-cols-1 gap-6 lg:grid-cols-3">
+          {websitePlans.map((plan, index) => (
+            <motion.article
+              key={plan.title}
+              initial={{ opacity: 0, y: 42 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.55, delay: index * 0.08 }}
+              className={`border p-7 shadow-sm backdrop-blur ${
+                plan.featured
+                  ? "border-black bg-black text-white"
+                  : "border-black/10 bg-white/75 text-black"
+              }`}
             >
+              {plan.featured ? (
+                <p className="mb-5 text-xs font-black uppercase tracking-[0.22em] text-[#f8dca8]">
+                  Most Popular
+                </p>
+              ) : null}
 
-              {/* Popular Badge */}
-              <div className="absolute top-5 right-5 px-4 py-2 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 text-white text-xs font-black uppercase tracking-widest">
-                Most Popular
+              <h3 className="text-3xl font-black">{plan.title}</h3>
+
+              <p
+                className={`mt-4 leading-7 ${
+                  plan.featured ? "text-white/70" : "text-gray-600"
+                }`}
+              >
+                {plan.description}
+              </p>
+
+              <div
+                className={`mt-8 border-y py-6 ${
+                  plan.featured ? "border-white/15" : "border-black/10"
+                }`}
+              >
+                <p className="text-5xl font-black">{plan.price}</p>
               </div>
 
-              {/* Title */}
-              <h3 className="text-3xl font-black text-black">
-                {plan.title}
-              </h3>
-
-              {/* Price */}
-              <div className="mt-6 text-5xl font-black gradient-text">
-                {plan.price}
-              </div>
-
-              {/* Features */}
-              <ul className="mt-10 space-y-4">
-
-                {plan.features.map((feature, i) => (
-
-                  <li
-                    key={i}
-                    className="text-gray-700 text-lg flex items-center gap-3"
-                  >
-                    ✅ {feature}
+              <ul className="mt-7 space-y-4">
+                {plan.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3">
+                    <Check
+                      className={`mt-0.5 h-5 w-5 flex-none ${
+                        plan.featured ? "text-[#f8dca8]" : "text-[#b8752e]"
+                      }`}
+                    />
+                    <span
+                      className={plan.featured ? "text-white/80" : "text-gray-700"}
+                    >
+                      {feature}
+                    </span>
                   </li>
-
                 ))}
-
               </ul>
 
-              {/* Buttons */}
-              <div className="mt-10 flex flex-col gap-4">
-
+              <div className="mt-9 grid gap-3">
                 <a
-                  href="https://wa.me/919370309722"
+                  href={whatsappLink(plan.title)}
                   target="_blank"
-                  className="w-full text-center px-8 py-4 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 text-white font-black shadow-2xl hover:scale-105 transition duration-300"
+                  rel="noreferrer"
+                  className={`inline-flex items-center justify-center gap-3 px-6 py-4 text-sm font-black uppercase tracking-[0.12em] transition ${
+                    plan.featured
+                      ? "bg-[#f8dca8] text-black hover:bg-white"
+                      : "bg-black text-white hover:bg-[#d9a55b] hover:text-black"
+                  }`}
                 >
+                  <MessageCircle className="h-5 w-5" />
                   Book On WhatsApp
                 </a>
 
                 <a
-                  href="upi://pay?pa=9370309722@fam&pn=STRIXO%20STUDIO&cu=INR"
-                  className="w-full text-center px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-black shadow-2xl hover:scale-105 transition duration-300"
+                  href={upiLink(`${plan.title} advance payment`)}
+                  className={`inline-flex items-center justify-center gap-3 border px-6 py-4 text-sm font-black uppercase tracking-[0.12em] transition ${
+                    plan.featured
+                      ? "border-white/20 text-white hover:bg-white hover:text-black"
+                      : "border-black/15 text-black hover:bg-black hover:text-white"
+                  }`}
                 >
+                  <CreditCard className="h-5 w-5" />
                   Pay Advance
                 </a>
-
               </div>
-
-            </motion.div>
-
+            </motion.article>
           ))}
-
         </div>
-
       </div>
-
     </section>
   );
 }

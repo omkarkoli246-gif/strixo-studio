@@ -1,45 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+const particles = Array.from({ length: 24 }, (_, index) => ({
+  id: index,
+  left: (index * 37 + 11) % 100,
+  top: (index * 53 + 17) % 100,
+  duration: 2.5 + (index % 6) * 0.55,
+}));
 
 export default function Particles() {
-
-  const [mounted, setMounted] =
-    useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  const particles = Array.from(
-    { length: 25 },
-    (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-      duration: 2 + Math.random() * 5,
-    })
-  );
-
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
       {particles.map((particle) => (
-
         <span
           key={particle.id}
-          className="absolute w-2 h-2 bg-white/20 rounded-full animate-pulse"
+          className="absolute h-1.5 w-1.5 rounded-full bg-white/20"
           style={{
             left: `${particle.left}%`,
             top: `${particle.top}%`,
-            animationDuration: `${particle.duration}s`,
+            animation: `particlePulse ${particle.duration}s ease-in-out infinite`,
           }}
         />
-
       ))}
-
     </div>
   );
 }

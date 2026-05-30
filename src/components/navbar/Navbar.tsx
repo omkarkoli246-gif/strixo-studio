@@ -1,266 +1,159 @@
 "use client";
 
 import Link from "next/link";
-
+import Image from "next/image";
 import { motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
-import {
-  Menu,
-  X,
-} from "lucide-react";
-
-import {
-  useEffect,
-  useState,
-} from "react";
+const navItems = [
+  {
+    label: "Home",
+    id: "home",
+  },
+  {
+    label: "Services",
+    id: "services",
+  },
+  {
+    label: "Reels",
+    id: "reels",
+  },
+  {
+    label: "Websites",
+    id: "pricing",
+  },
+  {
+    label: "Portfolio",
+    id: "portfolio",
+  },
+  {
+    label: "Contact",
+    id: "contact",
+  },
+];
 
 export default function Navbar() {
-
-  const [scrolled, setScrolled] =
-    useState(false);
-
-  const [open, setOpen] =
-    useState(false);
-
-  const [active, setActive] =
-    useState("home");
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("home");
 
   useEffect(() => {
-
     const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
 
-      if (window.scrollY > 50) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      const scrollPosition = window.scrollY + 220;
 
-      const sections = [
-        "home",
-        "services",
-        "portfolio",
-        "pricing",
-        "contact",
-      ];
+      navItems.forEach((item) => {
+        const element = document.getElementById(item.id);
 
-      const scrollPosition =
-        window.scrollY + 200;
+        if (!element) return;
 
-      sections.forEach((section) => {
+        const offsetTop = element.offsetTop;
+        const offsetHeight = element.offsetHeight;
 
-        const element =
-          document.getElementById(section);
-
-        if (element) {
-
-          const offsetTop =
-            element.offsetTop;
-
-          const offsetHeight =
-            element.offsetHeight;
-
-          if (
-            scrollPosition >= offsetTop &&
-            scrollPosition <
-              offsetTop + offsetHeight
-          ) {
-            setActive(section);
-          }
-
+        if (
+          scrollPosition >= offsetTop &&
+          scrollPosition < offsetTop + offsetHeight
+        ) {
+          setActive(item.id);
         }
-
       });
-
     };
 
-    window.addEventListener(
-      "scroll",
-      handleScroll
-    );
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-
-      window.removeEventListener(
-        "scroll",
-        handleScroll
-      );
-
+      window.removeEventListener("scroll", handleScroll);
     };
-
   }, []);
 
   return (
     <>
-      {/* Navbar */}
-      <motion.nav
-        initial={{ y: -80 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 w-full z-[9999] transition-all duration-500 ${
+      <nav
+        className={`fixed left-0 top-0 z-[9999] w-full border-b transition-all duration-500 ${
           scrolled
-            ? "backdrop-blur-xl bg-white/70 shadow-xl border-b border-white/20"
-            : "bg-transparent"
+            ? "border-black/10 bg-white/[0.88] text-black shadow-xl backdrop-blur-xl"
+            : "border-white/10 bg-black/[0.08] text-white backdrop-blur-sm"
         }`}
       >
-
-        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-
-          {/* Logo */}
-          <Link href="/">
-
-            <h1 className="text-3xl font-black gradient-text">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <Link href="/" className="flex items-center gap-3">
+            <span className="grid h-11 w-11 place-items-center overflow-hidden border border-[#d9a55b]/55 bg-black">
+              <Image
+                src="/favicon.png"
+                alt="STRIXO STUDIO"
+                width={44}
+                height={44}
+                className="h-full w-full object-cover object-top"
+              />
+            </span>
+            <span className="text-xl font-black tracking-[0.12em]">
               STRIXO
-            </h1>
-
+            </span>
           </Link>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-10">
-
-            <a
-              href="#home"
-              className={`font-semibold transition ${
-                active === "home"
-                  ? "text-indigo-600"
-                  : "text-black hover:text-indigo-600"
-              }`}
-            >
-              Home
-            </a>
-
-            <a
-              href="#services"
-              className={`font-semibold transition ${
-                active === "services"
-                  ? "text-indigo-600"
-                  : "text-black hover:text-indigo-600"
-              }`}
-            >
-              Services
-            </a>
-
-            <a
-              href="#portfolio"
-              className={`font-semibold transition ${
-                active === "portfolio"
-                  ? "text-indigo-600"
-                  : "text-black hover:text-indigo-600"
-              }`}
-            >
-              Portfolio
-            </a>
-
-            <a
-              href="#pricing"
-              className={`font-semibold transition ${
-                active === "pricing"
-                  ? "text-indigo-600"
-                  : "text-black hover:text-indigo-600"
-              }`}
-            >
-              Pricing
-            </a>
-
-            <a
-              href="#contact"
-              className={`font-semibold transition ${
-                active === "contact"
-                  ? "text-indigo-600"
-                  : "text-black hover:text-indigo-600"
-              }`}
-            >
-              Contact
-            </a>
-
+          <div className="hidden items-center gap-8 md:flex">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`text-sm font-black uppercase tracking-[0.12em] transition ${
+                  active === item.id
+                    ? "text-[#d9a55b]"
+                    : scrolled
+                      ? "text-black hover:text-[#b8752e]"
+                      : "text-white/80 hover:text-white"
+                }`}
+              >
+                {item.label}
+              </a>
+            ))}
           </div>
 
-          {/* Desktop Button */}
           <a
-            href="#contact"
-            className="hidden md:block px-6 py-3 rounded-full bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-bold shadow-xl hover:scale-105 transition duration-300"
+            href="https://wa.me/919370309722?text=Hi%20STRIXO%20STUDIO%2C%20I%20want%20to%20start%20a%20project."
+            target="_blank"
+            className="hidden bg-black px-5 py-3 text-sm font-black uppercase tracking-[0.12em] text-white transition hover:bg-[#d9a55b] hover:text-black md:block"
           >
-            Let’s Talk
+            Let&apos;s Talk
           </a>
 
-          {/* Mobile Menu Button */}
           <button
+            type="button"
             onClick={() => setOpen(!open)}
+            aria-label="Open menu"
             className="md:hidden"
           >
-
             {open ? (
-              <X className="w-8 h-8 text-black" />
+              <X className="h-8 w-8" />
             ) : (
-              <Menu className="w-8 h-8 text-black" />
+              <Menu className="h-8 w-8" />
             )}
-
           </button>
-
         </div>
+      </nav>
 
-      </motion.nav>
-
-      {/* Mobile Menu */}
-      {open && (
-
+      {open ? (
         <motion.div
-          initial={{
-            opacity: 0,
-            y: -20,
-          }}
-          animate={{
-            opacity: 1,
-            y: 0,
-          }}
-          transition={{
-            duration: 0.4,
-          }}
-          className="fixed inset-0 z-[9998] bg-[#f8f5ef] flex flex-col items-center justify-center gap-10"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35 }}
+          className="fixed inset-0 z-[9998] flex flex-col items-center justify-center gap-8 bg-black text-white"
         >
-
-          <a
-            href="#home"
-            className="text-4xl font-black"
-            onClick={() => setOpen(false)}
-          >
-            Home
-          </a>
-
-          <a
-            href="#services"
-            className="text-4xl font-black"
-            onClick={() => setOpen(false)}
-          >
-            Services
-          </a>
-
-          <a
-            href="#portfolio"
-            className="text-4xl font-black"
-            onClick={() => setOpen(false)}
-          >
-            Portfolio
-          </a>
-
-          <a
-            href="#pricing"
-            className="text-4xl font-black"
-            onClick={() => setOpen(false)}
-          >
-            Pricing
-          </a>
-
-          <a
-            href="#contact"
-            className="text-4xl font-black"
-            onClick={() => setOpen(false)}
-          >
-            Contact
-          </a>
-
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className="text-4xl font-black"
+              onClick={() => setOpen(false)}
+            >
+              {item.label}
+            </a>
+          ))}
         </motion.div>
-
-      )}
+      ) : null}
     </>
   );
 }

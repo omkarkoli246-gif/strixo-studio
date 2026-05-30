@@ -1,92 +1,81 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Mail, MapPin, Phone } from "lucide-react";
+
+const contactItems = [
+  {
+    label: "strixostudio4@gmail.com",
+    Icon: Mail,
+  },
+  {
+    label: "+91 9370309722",
+    Icon: Phone,
+  },
+  {
+    label: "Pune, Maharashtra",
+    Icon: MapPin,
+  },
+];
 
 export default function Contact() {
   return (
     <section id="contact" className="section-spacing px-6">
-
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-
-        {/* Left Content */}
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-12 lg:grid-cols-[0.9fr_1.1fr]">
         <motion.div
-          initial={{
-            opacity: 0,
-            x: -50,
-          }}
-          whileInView={{
-            opacity: 1,
-            x: 0,
-          }}
-          transition={{
-            duration: 0.7,
-          }}
+          initial={{ opacity: 0, x: -38 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
         >
-
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase">
-            CONTACT
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b8752e]">
+            Contact
           </p>
 
-          <h2 className="text-5xl md:text-6xl font-black mt-4 text-black">
-            Let’s Build Something Amazing
+          <h2 className="mt-4 text-4xl font-black leading-tight text-black sm:text-6xl">
+            Let&apos;s build something amazing
           </h2>
 
-          <p className="mt-8 text-gray-600 text-xl leading-relaxed">
-            Have a project in mind?
-            STRIXO STUDIO is ready to help your brand grow
-            with premium content, editing and digital marketing.
+          <p className="mt-7 max-w-xl text-lg leading-8 text-gray-600">
+            Have a reel, campaign, website or monthly social media plan in
+            mind? STRIXO STUDIO is ready to help your brand grow.
           </p>
 
-          <div className="mt-10 space-y-4">
-
-            <p className="text-lg font-semibold text-black">
-              📧 strixostudio4@gmail.com
-            </p>
-
-            <p className="text-lg font-semibold text-black">
-              📞 +91 9370309722
-            </p>
-
-            <p className="text-lg font-semibold text-black">
-              📍 Pune, Maharashtra
-            </p>
-
+          <div className="mt-9 space-y-4">
+            {contactItems.map((item) => (
+              <p
+                key={item.label}
+                className="flex items-center gap-3 text-lg font-bold text-black"
+              >
+                <item.Icon className="h-5 w-5 text-[#b8752e]" />
+                {item.label}
+              </p>
+            ))}
           </div>
-
         </motion.div>
 
-        {/* Form */}
         <motion.div
-          initial={{
-            opacity: 0,
-            x: 50,
-          }}
-          whileInView={{
-            opacity: 1,
-            x: 0,
-          }}
-          transition={{
-            duration: 0.7,
-          }}
-          className="glass rounded-[40px] p-10 shadow-2xl"
+          initial={{ opacity: 0, x: 38 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.6 }}
+          className="border border-black/10 bg-white/75 p-7 shadow-sm backdrop-blur sm:p-10"
         >
-
           <form
             action="https://formsubmit.co/strixostudio4@gmail.com"
             method="POST"
-            className="space-y-6"
+            className="space-y-5"
           >
-
+            <input type="hidden" name="_captcha" value="false" />
             <input
               type="hidden"
-              name="_captcha"
-              value="false"
+              name="_subject"
+              value="New STRIXO STUDIO enquiry"
             />
-
             <input
               type="hidden"
               name="_next"
-              value="http://localhost:3000"
+              value="https://strixo-studio.vercel.app/#contact"
             />
 
             <input
@@ -94,7 +83,7 @@ export default function Contact() {
               name="name"
               placeholder="Your Name"
               required
-              className="w-full p-5 rounded-2xl bg-white/70 border border-white/40 outline-none"
+              className="w-full border border-black/10 bg-white p-5 outline-none transition focus:border-black"
             />
 
             <input
@@ -102,7 +91,7 @@ export default function Contact() {
               name="email"
               placeholder="Your Email"
               required
-              className="w-full p-5 rounded-2xl bg-white/70 border border-white/40 outline-none"
+              className="w-full border border-black/10 bg-white p-5 outline-none transition focus:border-black"
             />
 
             <input
@@ -110,7 +99,7 @@ export default function Contact() {
               name="subject"
               placeholder="Subject"
               required
-              className="w-full p-5 rounded-2xl bg-white/70 border border-white/40 outline-none"
+              className="w-full border border-black/10 bg-white p-5 outline-none transition focus:border-black"
             />
 
             <textarea
@@ -118,22 +107,18 @@ export default function Contact() {
               placeholder="Your Message"
               rows={6}
               required
-              className="w-full p-5 rounded-2xl bg-white/70 border border-white/40 outline-none"
+              className="w-full border border-black/10 bg-white p-5 outline-none transition focus:border-black"
             />
 
             <button
               type="submit"
-              className="w-full py-5 rounded-2xl bg-gradient-to-r from-indigo-600 to-cyan-500 text-white font-black text-lg shadow-2xl hover:scale-[1.02] transition duration-300"
+              className="w-full bg-black py-5 text-lg font-black text-white shadow-xl transition hover:bg-[#d9a55b] hover:text-black"
             >
               Send Message
             </button>
-
           </form>
-
         </motion.div>
-
       </div>
-
     </section>
   );
 }

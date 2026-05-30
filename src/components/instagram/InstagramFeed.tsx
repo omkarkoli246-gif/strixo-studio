@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { FaInstagram } from "react-icons/fa";
 
 const posts = [
   "/videos/video1.mp4",
@@ -11,69 +12,56 @@ const posts = [
 export default function InstagramFeed() {
   return (
     <section className="section-spacing px-6">
-
-      <div className="max-w-7xl mx-auto">
-
-        {/* Heading */}
+      <div className="mx-auto max-w-7xl">
         <div className="text-center">
-
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase">
-            INSTAGRAM
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b8752e]">
+            Instagram
           </p>
 
-          <h2 className="text-5xl md:text-6xl font-black mt-4 text-black">
-            Follow Our Content
+          <h2 className="mt-4 text-4xl font-black leading-tight text-black sm:text-6xl">
+            Follow our latest content
           </h2>
 
-          <p className="mt-6 text-gray-600 text-xl">
-            Premium edits, reels and cinematic content.
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-gray-600">
+            Premium edits, reels and cinematic content from STRIXO STUDIO.
           </p>
-
         </div>
 
-        {/* Videos */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
-
+        <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-3">
           {posts.map((post, index) => (
-
             <motion.div
-              key={index}
-              whileHover={{
-                scale: 1.03,
-              }}
-              className="overflow-hidden rounded-[30px] shadow-2xl"
+              key={post}
+              initial={{ opacity: 0, y: 34 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, delay: index * 0.06 }}
+              className="overflow-hidden border border-black/10 bg-black shadow-sm"
             >
-
               <video
                 src={post}
                 autoPlay
                 muted
                 loop
                 playsInline
-                className="w-full h-[500px] object-cover"
+                preload="metadata"
+                className="h-[500px] w-full object-cover"
               />
-
             </motion.div>
-
           ))}
-
         </div>
 
-        {/* Instagram Button */}
-        <div className="flex justify-center mt-14">
-
+        <div className="mt-12 flex justify-center">
           <a
             href="https://instagram.com/strixo_studio"
             target="_blank"
-            className="px-10 py-5 rounded-full bg-gradient-to-r from-pink-500 via-red-500 to-orange-500 text-white font-black text-lg shadow-2xl hover:scale-105 transition duration-300"
+            rel="noreferrer"
+            className="inline-flex items-center justify-center gap-3 bg-black px-7 py-4 text-sm font-black uppercase tracking-[0.14em] text-white transition hover:bg-[#d9a55b] hover:text-black"
           >
+            <FaInstagram className="h-5 w-5" />
             Follow On Instagram
           </a>
-
         </div>
-
       </div>
-
     </section>
   );
 }

@@ -1,94 +1,79 @@
 "use client";
 
+import { Minus, Plus } from "lucide-react";
 import { useState } from "react";
 
 const faqs = [
   {
-    question: "How long does delivery take?",
+    question: "How long does reel delivery take?",
     answer:
-      "Most reel projects are delivered within 2–3 days depending on complexity.",
+      "Most reel projects are delivered within 2-3 days, depending on the shoot material and editing complexity.",
   },
-
   {
     question: "Do you provide revisions?",
     answer:
-      "Yes. We provide revisions to ensure the final content matches your vision perfectly.",
+      "Yes. Revisions are included so the final content matches your brand and campaign goal.",
   },
-
   {
     question: "Do you handle social media accounts?",
     answer:
-      "Yes. STRIXO STUDIO offers complete social media handling and growth services.",
+      "Yes. STRIXO STUDIO offers monthly social media handling for posting, creatives and account consistency.",
   },
-
   {
     question: "Which payment methods do you accept?",
     answer:
-      "We accept UPI, Bank Transfer and online payments.",
+      "We accept UPI and bank transfer. The package buttons open a direct UPI payment link on mobile.",
   },
 ];
 
 export default function FAQ() {
-
-  const [active, setActive] = useState<number | null>(null);
+  const [active, setActive] = useState<number | null>(0);
 
   return (
     <section className="section-spacing px-6">
-
-      <div className="max-w-5xl mx-auto">
-
+      <div className="mx-auto max-w-5xl">
         <div className="text-center">
-
-          <p className="text-sm font-semibold tracking-widest text-indigo-600 uppercase">
+          <p className="text-sm font-black uppercase tracking-[0.24em] text-[#b8752e]">
             FAQ
           </p>
 
-          <h2 className="text-5xl md:text-6xl font-black mt-4 text-black">
-            Frequently Asked Questions
+          <h2 className="mt-4 text-4xl font-black leading-tight text-black sm:text-6xl">
+            Common questions before you book
           </h2>
-
         </div>
 
-        <div className="mt-16 space-y-6">
+        <div className="mt-12 space-y-4">
+          {faqs.map((item, index) => {
+            const isOpen = active === index;
 
-          {faqs.map((item, index) => (
-
-            <div
-              key={index}
-              className="glass rounded-[30px] p-8 shadow-xl cursor-pointer"
-              onClick={() =>
-                setActive(active === index ? null : index)
-              }
-            >
-
-              <div className="flex items-center justify-between">
-
-                <h3 className="text-xl font-bold text-black">
-                  {item.question}
-                </h3>
-
-                <span className="text-3xl font-bold text-indigo-600">
-                  {active === index ? "-" : "+"}
+            return (
+              <button
+                key={item.question}
+                type="button"
+                className="w-full border border-black/10 bg-white/75 p-6 text-left shadow-sm backdrop-blur"
+                onClick={() => setActive(isOpen ? null : index)}
+              >
+                <span className="flex items-center justify-between gap-6">
+                  <span className="text-lg font-black text-black">
+                    {item.question}
+                  </span>
+                  {isOpen ? (
+                    <Minus className="h-5 w-5 text-[#b8752e]" />
+                  ) : (
+                    <Plus className="h-5 w-5 text-[#b8752e]" />
+                  )}
                 </span>
 
-              </div>
-
-              {active === index && (
-
-                <p className="mt-6 text-gray-600 text-lg leading-relaxed">
-                  {item.answer}
-                </p>
-
-              )}
-
-            </div>
-
-          ))}
-
+                {isOpen ? (
+                  <span className="mt-5 block text-base leading-7 text-gray-600">
+                    {item.answer}
+                  </span>
+                ) : null}
+              </button>
+            );
+          })}
         </div>
-
       </div>
-
     </section>
   );
 }

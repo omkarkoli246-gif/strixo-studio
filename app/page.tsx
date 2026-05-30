@@ -1,4 +1,5 @@
 import Navbar from "../src/components/navbar/Navbar";
+import WelcomeIntro from "../src/components/intro/WelcomeIntro";
 import Hero from "../src/components/hero/Hero";
 import Marquee from "../src/components/marquee/Marquee";
 import Stats from "../src/components/stats/Stats";
@@ -20,6 +21,8 @@ import Reveal from "../src/components/animations/Reveal";
 export default function Home() {
   return (
     <main>
+
+      <WelcomeIntro />
 
       <Navbar />
 
